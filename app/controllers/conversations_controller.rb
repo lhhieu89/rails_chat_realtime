@@ -10,6 +10,8 @@ class ConversationsController < ApplicationController
       @conversation = Conversation.create!(conversation_params)
     end
 
+    Message.new_messages(params[:recipient_id], params[:sender_id]).update_all(viewed: 1)
+
     render json: { conversation_id: @conversation.id }
   end
 
